@@ -5,6 +5,10 @@
 [npm-url]: https://npmjs.org/package/gatsby-plugin-relative-paths
 [npm-image]: https://img.shields.io/npm/v/gatsby-plugin-relative-paths.svg
 
+## Remark
+
+This fork create for private project for use static html page without gatsby webserver
+
 ## Installation
 
 ```

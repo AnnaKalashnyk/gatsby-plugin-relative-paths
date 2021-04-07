@@ -30,8 +30,8 @@ class RelativizeContent {
     // Skip if is a binary file
     if (!isTextPath(path)) return contents;
     if (!contents.includes(this.assetPrefix)) return contents;
-    contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), `./assets`);
-    this.verbose && console.log('[relative-paths][MISC]', path, `${this.assetPrefix} => ./assets`);
+    contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), `../assets`);
+    this.verbose && console.log('[relative-paths][MISC]', path, `${this.assetPrefix} => ../assets`);
     return contents;
   }
 }

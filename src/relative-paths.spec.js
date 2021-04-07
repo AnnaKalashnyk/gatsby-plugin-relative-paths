@@ -12,7 +12,7 @@ describe('getRelativePrefix', () => {
     <script src="/__GATSBY_RELATIVE_PATH__/app.js"></script>
   `;
     expect(relativize.inHtmlFiles({ path, contents })).toEqual(`
-    <script src="./assets/app.js"></script>
+    <script src="../assets/app.js"></script>
   `);
   });
 
@@ -23,8 +23,8 @@ describe('getRelativePrefix', () => {
     fnc('/__GATSBY_RELATIVE_PATH__' + '/page-data/app-data.json';
   `;
     expect(relativize.inJsFiles({ path, contents })).toEqual(`
-    return './assets' + '/page-data/app-data.json';
-    fnc('./assets' + '/page-data/app-data.json';
+    return '../assets' + '/page-data/app-data.json';
+    fnc('../assets' + '/page-data/app-data.json';
   `);
   });
 
