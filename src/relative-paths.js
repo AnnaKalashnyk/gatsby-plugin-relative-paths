@@ -10,7 +10,7 @@ class RelativizeContent {
   inHtmlFiles({ path, contents }) {
     if (!contents.includes(`/${this.assetPrefix}`)) return contents;
 
-    const string = `./assets`;
+    const string = `../assets`;
     contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), string);
     this.verbose && console.log('[relative-paths][HTML]', path, `${this.assetPrefix} => ${string}`);
 
@@ -20,7 +20,7 @@ class RelativizeContent {
   inJsFiles({ path, contents }) {
     if (!contents.includes(this.assetPrefix)) return contents;
 
-    const string = `./assets`;
+    const string = `../assets`;
     contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), string);
     this.verbose && console.log('[relative-paths][_JS_]', path, `${this.assetPrefix} => ${string}`);
     return contents;

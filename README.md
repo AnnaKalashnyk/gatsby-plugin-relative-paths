@@ -161,11 +161,11 @@ Assets URL: www.example.com/my-company/assets
 JS
 
 ```javascript
-return './assets' + '/page-data/app-data.json';
+return '../assets' + '/page-data/app-data.json';
 ```
 
 Our browser search for the resource at the following location:
-`www.example.com/my-company/blog/posts/1/assets/page-data/app-data.json`.
+`www.example.com/my-company/blog/posts/assets/page-data/app-data.json`.
 
 Due to this and because more data can be loaded asynchronously in webpack; creating symbolic links of assets folder for each html fix these problems without affecting hard drive space.
 
