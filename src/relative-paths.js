@@ -10,7 +10,7 @@ class RelativizeContent {
   inHtmlFiles({ path, contents }) {
     if (!contents.includes(`/${this.assetPrefix}`)) return contents;
 
-    const string = `..`;
+    const string = `.`;
     contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), string);
     this.verbose && console.log('[relative-paths][HTML]', path, `${this.assetPrefix} => ${string}`);
 
