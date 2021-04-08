@@ -1,5 +1,5 @@
 const isTextPath = require('is-text-path');
-const { editFiles, copyAllAssets } = require('./core');
+const { editFiles } = require('./core');
 
 class RelativizeContent {
   constructor({ assetPrefix, verbose = false }) {
@@ -10,7 +10,7 @@ class RelativizeContent {
   inHtmlFiles({ path, contents }) {
     if (!contents.includes(`/${this.assetPrefix}`)) return contents;
 
-    const string = `../assets`;
+    const string = `..`;
     contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), string);
     this.verbose && console.log('[relative-paths][HTML]', path, `${this.assetPrefix} => ${string}`);
 
@@ -20,7 +20,7 @@ class RelativizeContent {
   inJsFiles({ path, contents }) {
     if (!contents.includes(this.assetPrefix)) return contents;
 
-    const string = `../assets`;
+    const string = `..`;
     contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), string);
     this.verbose && console.log('[relative-paths][_JS_]', path, `${this.assetPrefix} => ${string}`);
     return contents;
@@ -30,17 +30,16 @@ class RelativizeContent {
     // Skip if is a binary file
     if (!isTextPath(path)) return contents;
     if (!contents.includes(this.assetPrefix)) return contents;
-    contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), `./assets`);
+    contents = contents.replace(new RegExp(`(/${this.assetPrefix}|${this.assetPrefix})`, 'g'), `.`);
     this.verbose && console.log('[relative-paths][MISC]', path, `${this.assetPrefix} => ./assets`);
     return contents;
   }
 }
 
-async function relativizeFiles({ assetPrefix, assetFolder = 'public/assets', verbose }) {
+async function relativizeFiles({ assetPrefix, assetFolder = 'public', verbose }) {
   const relativize = new RelativizeContent({ assetPrefix, assetFolder, verbose });
 
   await editFiles(['public/**/*.html'], ({ path, contents }) => {
-    copyAllAssets(path, { assetFolder });
     return relativize.inHtmlFiles({ path, contents });
   });
 
