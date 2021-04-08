@@ -1,4 +1,5 @@
 const { relativizeFiles } = require('./src/relative-paths');
+const { moveAllAssets } = require('./src/core');
 
 const assetPrefix = '__GATSBY_RELATIVE_PATH__';
 
@@ -14,7 +15,8 @@ exports.onPreBootstrap = ({ store, reporter }) => {
 };
 
 exports.onPostBuild = async (_, { assetFolder = 'public', verbose = false }) => {
-  assetFolder = `${assetFolder}`;
+  assetFolder = `${assetFolder}/assets`;
 
+  await moveAllAssets({ assetFolder, verbose });
   await relativizeFiles({ assetPrefix, assetFolder, verbose });
 };
